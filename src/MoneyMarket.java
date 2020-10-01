@@ -22,11 +22,11 @@ public class MoneyMarket extends Account{
 
     @Override
     public double monthlyInterest() {
-        return 0;
+        return this.getBalance() * 0.0065/12;
     }
 
     @Override
     public double monthlyFee() {
-        return 0;
+        return this.getBalance() >= 2500 && this.withdrawals <= 6 ? 0 : 12;
     }
 }

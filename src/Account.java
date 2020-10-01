@@ -25,4 +25,8 @@ public abstract class Account {
     }
     public abstract double monthlyInterest();
     public abstract double monthlyFee();
+
+    public double getBalance() {
+        return balance;
+    }
 }

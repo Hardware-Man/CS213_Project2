@@ -19,11 +19,11 @@ public class Checking extends Account{
 
     @Override
     public double monthlyInterest() {
-        return 0;
+        return this.getBalance() * 0.0005/12;
     }
 
     @Override
     public double monthlyFee() {
-        return 0;
+        return this.getBalance() >= 1500 || this.directDeposit ? 0 : 25;
     }
 }
