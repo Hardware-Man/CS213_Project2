@@ -6,6 +6,10 @@
 public class Savings extends Account{
     private boolean isLoyal;
 
+    public Savings(Profile holder, double balance, Date dateOpen) {
+        super(holder, balance, dateOpen);
+    }
+
     @Override
     public double monthlyInterest() {
         return 0;

@@ -6,6 +6,10 @@
 public class MoneyMarket extends Account{
     private int withdrawals;
 
+    public MoneyMarket(Profile holder, double balance, Date dateOpen) {
+        super(holder, balance, dateOpen);
+    }
+
     @Override
     public double monthlyInterest() {
         return 0;

@@ -6,6 +6,10 @@
 public class Checking extends Account{
     private boolean directDeposit;
 
+    public Checking(Profile holder, double balance, Date dateOpen) {
+        super(holder, balance, dateOpen);
+    }
+
     @Override
     public double monthlyInterest() {
         return 0;
