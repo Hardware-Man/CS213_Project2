@@ -4,4 +4,7 @@
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
 public class RunProject2 {
+    public static void main(String[] args) {
+
+    }
 }
