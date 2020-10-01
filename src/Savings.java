@@ -4,10 +4,17 @@
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
 public class Savings extends Account{
-    private boolean isLoyal;
+    private final boolean isLoyal;
 
-    public Savings(Profile holder, double balance, Date dateOpen) {
+    public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal) {
         super(holder, balance, dateOpen);
+        this.isLoyal = isLoyal;
+    }
+
+    @Override
+    public String toString() {
+        return isLoyal ?
+                "*Savings*" + super.toString() + "*special Savings account*" : "*Savings*" + super.toString();
     }
 
     @Override

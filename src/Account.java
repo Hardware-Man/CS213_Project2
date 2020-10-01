@@ -21,7 +21,7 @@ public abstract class Account {
         this.balance += amount;
     }
     public String toString() {
-        return "";
+        return holder.toString() + "* " + balance + "*" + dateOpen.toString() + "*";
     }
     public abstract double monthlyInterest();
     public abstract double monthlyFee();

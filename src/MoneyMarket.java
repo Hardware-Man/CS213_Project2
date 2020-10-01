@@ -6,8 +6,18 @@
 public class MoneyMarket extends Account{
     private int withdrawals;
 
-    public MoneyMarket(Profile holder, double balance, Date dateOpen) {
+    public MoneyMarket(Profile holder, double balance, Date dateOpen, int withdrawals) {
         super(holder, balance, dateOpen);
+        this.withdrawals = withdrawals;
+    }
+
+    public void addWithdrawal() {
+        this.withdrawals++;
+    }
+
+    @Override
+    public String toString() {
+        return "*Money Market*" + super.toString() + "*" + withdrawals + " withdrawals*";
     }
 
     @Override
