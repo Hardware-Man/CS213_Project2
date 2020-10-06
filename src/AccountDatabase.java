@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * This is an array-based container class with an initial capacity of 5. It will automatically grow the capacity by 5
  * if the database is full. The array shall hold different account instances in Checking, Savings or MoneyMarket.
@@ -48,24 +51,45 @@ public class AccountDatabase {
         return true;
     }
     public boolean deposit(Account account, double amount) {
+        int accountPosition = find(account);
+        if(accountPosition == -1) {
+            return false;
+        }
+        accounts[accountPosition].credit(amount);
         return true;
     }
     public int withdrawal(Account account, double amount) {
+        int accountPosition = find(account);
+        if(accountPosition == -1) {
+            return -1;
+        }
+        double currBal = accounts[accountPosition].getBalance();
+        if(currBal < amount) {
+            return 1;
+        }
         return 0;
     }
     private void sortByDateOpen() {
-
+        Arrays.sort(accounts, Comparator.comparing(Account::getDateOpen));
     }
     private void sortByLastName() {
-
+        Arrays.sort(accounts, Comparator.comparing(account -> account.getHolder().getLastNameFirstName()));
     }
     private void printByDateOpen() {
-
+        sortByDateOpen();
+        for(Account account : accounts) {
+            System.out.println(account.toString());
+        }
     }
     public void printByLastName() {
-
+        sortByLastName();
+        for(Account account : accounts) {
+            System.out.println(account.toString());
+        }
     }
     public void printAccounts() {
-
+        for(Account account : accounts) {
+            System.out.println(account.toString());
+        }
     }
 }

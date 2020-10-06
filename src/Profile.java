@@ -26,4 +26,8 @@ public class Profile {
         }
         return false;
     }
+
+    public String getLastNameFirstName() {
+        return lName+fName;
+    }
 }

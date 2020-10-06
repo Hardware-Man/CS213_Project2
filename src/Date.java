@@ -41,7 +41,7 @@ public class Date implements Comparable<Date>{
     }
 
     public boolean isValid() {
-        if(month < 1 || month > 12) {
+        if(month < 1 || month > 12 || day < 1 || year < 1) {
             return false;
         }
         else if(month == 2) {

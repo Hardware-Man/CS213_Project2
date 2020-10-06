@@ -33,4 +33,12 @@ public abstract class Account {
     public double getBalance() {
         return balance;
     }
+
+    public Date getDateOpen() {
+        return dateOpen;
+    }
+
+    public Profile getHolder() {
+        return holder;
+    }
 }
