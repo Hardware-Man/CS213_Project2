@@ -16,7 +16,14 @@ public class Profile {
         return fName + " " + lName;
     }
 
-    public boolean equals(Profile holder) {
-        return holder.fName.equals(this.fName) && holder.lName.equals(this.lName);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof Profile) {
+            Profile aProfile = (Profile) obj;
+            return fName.equals(aProfile.fName) && lName.equals(aProfile.lName);
+        }
+        return false;
     }
 }

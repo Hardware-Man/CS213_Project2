@@ -17,13 +17,17 @@ public abstract class Account {
     public void debit(double amount) {
         this.balance -= amount;
     }
+
     public void credit(double amount) {
         this.balance += amount;
     }
+
     public String toString() {
         return holder.toString() + "* " + balance + "*" + dateOpen.toString() + "*";
     }
+
     public abstract double monthlyInterest();
+
     public abstract double monthlyFee();
 
     public double getBalance() {
