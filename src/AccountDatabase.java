@@ -67,6 +67,7 @@ public class AccountDatabase {
         if(currBal < amount) {
             return 1;
         }
+        accounts[accountPosition].debit(amount);
         return 0;
     }
     private void sortByDateOpen() {
