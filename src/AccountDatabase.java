@@ -24,11 +24,13 @@ public class AccountDatabase {
         }
         return -1;
     }
+
     private void grow() {
         Account[] replaceAccounts = new Account[this.accounts.length+5];
         System.arraycopy(this.accounts, 0, replaceAccounts, 0, this.accounts.length);
         this.accounts = replaceAccounts;
     }
+
     public boolean add(Account account) {
         if(find(account) != -1) {
             return false;
@@ -40,6 +42,7 @@ public class AccountDatabase {
         size++;
         return true;
     }
+
     public boolean remove(Account account) {
         int accountPosition = find(account);
         if(accountPosition == -1) {
@@ -50,6 +53,7 @@ public class AccountDatabase {
         size--;
         return true;
     }
+
     public boolean deposit(Account account, double amount) {
         int accountPosition = find(account);
         if(accountPosition == -1) {
@@ -58,6 +62,7 @@ public class AccountDatabase {
         accounts[accountPosition].credit(amount);
         return true;
     }
+
     public int withdrawal(Account account, double amount) {
         int accountPosition = find(account);
         if(accountPosition == -1) {
@@ -70,24 +75,29 @@ public class AccountDatabase {
         accounts[accountPosition].debit(amount);
         return 0;
     }
+
     private void sortByDateOpen() {
         Arrays.sort(accounts, Comparator.comparing(Account::getDateOpen));
     }
+
     private void sortByLastName() {
         Arrays.sort(accounts, Comparator.comparing(account -> account.getHolder().getLastNameFirstName()));
     }
+
     private void printByDateOpen() {
         sortByDateOpen();
         for(Account account : accounts) {
             System.out.println(account.toString());
         }
     }
+
     public void printByLastName() {
         sortByLastName();
         for(Account account : accounts) {
             System.out.println(account.toString());
         }
     }
+
     public void printAccounts() {
         for(Account account : accounts) {
             System.out.println(account.toString());
