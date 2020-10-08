@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.Comparator;
-
 /**
  * This is an array-based container class with an initial capacity of 5. It will automatically grow the capacity by 5
  * if the database is full. The array shall hold different account instances in Checking, Savings or MoneyMarket.
@@ -17,8 +14,8 @@ public class AccountDatabase {
     }
 
     private int find(Account account) {
-        for(int i = 0; i < accounts.length; i++) {
-            if(accounts[i].equals(account)) {
+        for(int i = 0; i < size; i++) {
+            if(accounts[i].toString().equals(account.toString())) {
                 return i;
             }
         }
@@ -76,12 +73,36 @@ public class AccountDatabase {
         return 0;
     }
 
+
     private void sortByDateOpen() {
-        Arrays.sort(accounts, Comparator.comparing(Account::getDateOpen));
+        for (int i = 0; i < size - 1; i++)//selection sort
+        {
+            int earliestDateIndex = i;
+            for (int j = i + 1; j < size; j++)
+                if (accounts[j].getDateOpen()
+                        .compareTo(accounts[earliestDateIndex].getDateOpen()) < 1) {
+                    earliestDateIndex = j;
+                }
+            Account acc = accounts[earliestDateIndex];
+            accounts[earliestDateIndex] = accounts[i];
+            accounts[i] = acc;
+        }
     }
 
+
     private void sortByLastName() {
-        Arrays.sort(accounts, Comparator.comparing(account -> account.getHolder().getLastNameFirstName()));
+        for (int i = 0; i < size - 1; i++)//selection sort
+        {
+            int alphSmallerIndex = i;
+            for (int j = i + 1; j < size; j++)
+                if (accounts[j].getHolder().getLastNameFirstName()
+                        .compareTo(accounts[alphSmallerIndex].getHolder().getLastNameFirstName()) < 1) {
+                    alphSmallerIndex = j;
+                }
+            Account acc = accounts[alphSmallerIndex];
+            accounts[alphSmallerIndex] = accounts[i];
+            accounts[i] = acc;
+        }
     }
 
     private void printByDateOpen() {
@@ -99,8 +120,11 @@ public class AccountDatabase {
     }
 
     public void printAccounts() {
-        for(Account account : accounts) {
-            System.out.println(account.toString());
+        for(int i = 0; i < size;i++){
+            System.out.println(accounts[i]);
         }
+        /*for(Account account : accounts) {
+            System.out.println(account.toString());
+        }*/
     }
 }
