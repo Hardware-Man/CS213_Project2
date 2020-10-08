@@ -11,8 +11,10 @@ public class MoneyMarket extends Account {
         this.withdrawals = withdrawals;
     }
 
-    public void addWithdrawal() {
+    @Override
+    public void debit(double amount) {
         this.withdrawals++;
+        super.debit(amount);
     }
 
     @Override

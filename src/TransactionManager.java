@@ -52,10 +52,10 @@ public class TransactionManager {
                     closeAccount(accountsDB, command.charAt(1), tokens);
                     break;
                 case 'W':
-                    withdrawFromAccount(tokens);
+                    withdrawFromAccount(command.charAt(1), tokens);
                     break;
                 case 'D':
-                    depositToAccount(tokens);
+                    depositToAccount(command.charAt(1), tokens);
                     break;
                 case 'P':
                     displayAccounts(command.charAt(1));
@@ -190,6 +190,7 @@ public class TransactionManager {
             System.out.println("Wrong number of tokens");
             return;
         }
+
         Profile profile = new Profile(tokens.nextToken(), tokens.nextToken());
         switch (accType) {
             case 'C':
@@ -211,20 +212,110 @@ public class TransactionManager {
                     System.out.println("Account does not exist");
                 }
             default:
-                System.out.println("Command ' C" + accType + "' not supported!");
+                System.out.println("Command 'C" + accType + "' not supported!");
+        }
+    }
 
+
+    private void depositToAccount(char accType, StringTokenizer tokens) {
+        if (tokens.countTokens() != 3) {
+            System.out.println("Wrong number of tokens");
+            return;
         }
 
+        Profile profile = new Profile(tokens.nextToken(), tokens.nextToken());
+        double amount;
+        try {
+            amount = Double.parseDouble(tokens.nextToken());
+        } catch (NumberFormatException e) {
+            System.out.println("Input data type mismatch.");
+            return;
+        }
 
+        DecimalFormat moneyFormat = new DecimalFormat("0.00");
+        switch (accType) {
+            case 'C':
+                if (accountsDB.deposit(new Checking(profile, amount, new Date(1, 1, 1), false), amount)) {
+                    System.out.println(moneyFormat.format(amount) + " deposited successfully.");
+                    System.out.println("Account does not exist.");
+                }
+                break;
+            case 'S':
+                if (accountsDB.deposit(new Savings(profile, amount, new Date(1, 1, 1), false), amount)) {
+                    System.out.println(moneyFormat.format(amount) + " deposited successfully.");
+                } else {
+                    System.out.println("Account does not exist.");
+                }
+                break;
+            case 'M':
+                if (accountsDB.deposit(new MoneyMarket(profile, amount, new Date(1, 1, 1), 0), amount)) {
+                    System.out.println(moneyFormat.format(amount) + " deposited successfully.");
+                }
+                else {
+                    System.out.println("Account does not exist.");
+                }
+                break;
+            default:
+                System.out.println("Command 'C" + accType + "' not supported!");
+        }
     }
 
+    private void withdrawFromAccount(char accType, StringTokenizer tokens) {
+        if (tokens.countTokens() != 3) {
+            System.out.println("Wrong number of tokens");
+            return;
+        }
 
-    private void depositToAccount(StringTokenizer tokens) {
+        Profile profile = new Profile(tokens.nextToken(), tokens.nextToken());
+        double amount;
+        try {
+            amount = Double.parseDouble(tokens.nextToken());
+        } catch (NumberFormatException e) {
+            System.out.println("Input data type mismatch.");
+            return;
+        }
 
-    }
-
-    private void withdrawFromAccount(StringTokenizer tokens) {
-
+        DecimalFormat moneyFormat = new DecimalFormat("0.00");
+        switch (accType) {
+            case 'C':
+                switch (accountsDB.withdrawal(new Checking(profile, amount, new Date(1, 1, 1), false), amount)) {
+                    case -1:
+                        System.out.println("Account does not exist.");
+                        break;
+                    case 1:
+                        System.out.println("Insufficient funds.");
+                        break;
+                    default:
+                        System.out.println(moneyFormat.format(amount) + " withdrawn successfully.");
+                }
+                break;
+            case 'S':
+                switch (accountsDB.withdrawal(new Savings(profile, amount, new Date(1, 1, 1), false), amount)) {
+                    case -1:
+                        System.out.println("Account does not exist.");
+                        break;
+                    case 1:
+                        System.out.println("Insufficient funds.");
+                        break;
+                    default:
+                        System.out.println(moneyFormat.format(amount) + " withdrawn successfully.");
+                }
+                break;
+            case 'M':
+                switch (accountsDB.withdrawal(new MoneyMarket(profile, amount, new Date(1, 1, 1), 0), amount)) {
+                    case -1:
+                        System.out.println("Account does not exist.");
+                        break;
+                    case 1:
+                        System.out.println("Insufficient funds.");
+                        break;
+                    default:
+                        System.out.println(moneyFormat.format(amount) + " withdrawn successfully.");
+                }
+                break;
+            default:
+                System.out.println("Command 'C" + accType + "' not supported!");
+        }
     }
 
     private void displayAccounts(char specification) {
@@ -241,8 +332,5 @@ public class TransactionManager {
             default:
 
         }
-
     }
-
-
 }

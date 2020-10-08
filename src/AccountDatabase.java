@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 
 /**
@@ -116,11 +117,12 @@ public class AccountDatabase {
     public void printByDateOpen() {
         System.out.println("\n--Printing statements by date opened--\n");
         sortByDateOpen();
+        DecimalFormat moneyFormat = new DecimalFormat("0.00");
         for (int i = 0; i < size; i++) {
-            System.out.println(accounts[i].toString() + "\n-interest: "
-                    + accounts[i].monthlyInterest() + "\n-fee: " + accounts[i].monthlyFee()
-                    + "\n-new balance: " + accounts[i].getBalance());
-
+            System.out.println(accounts[i].toString() + "\n-interest: $ "
+                    + moneyFormat.format(accounts[i].monthlyInterest())
+                    + "\n-fee: $ " + moneyFormat.format(accounts[i].monthlyFee())
+                    + "\n-new balance: $ " + moneyFormat.format(accounts[i].getBalance()));
         }
         System.out.println("--end of printing--");
     }
@@ -128,10 +130,12 @@ public class AccountDatabase {
     public void printByLastName() {
         System.out.println("\n--Printing statements by last name--\n");
         sortByLastName();
+        DecimalFormat moneyFormat = new DecimalFormat("0.00");
         for (int i = 0; i < size; i++) {
-            System.out.println(accounts[i].toString() + "\n-interest: "
-                    + accounts[i].monthlyInterest() + "\n-fee: " + accounts[i].monthlyFee()
-                    + "\n-new balance: " + accounts[i].getBalance());
+            System.out.println(accounts[i].toString() + "\n-interest: $ "
+                    + moneyFormat.format(accounts[i].monthlyInterest())
+                    + "\n-fee: $ " + moneyFormat.format(accounts[i].monthlyFee())
+                    + "\n-new balance: $ " + moneyFormat.format(accounts[i].getBalance()));
         }
         System.out.println("--end of printing--");
     }
@@ -143,6 +147,4 @@ public class AccountDatabase {
         }
         System.out.println("--end of listing--");
     }
-
-
 }
