@@ -178,8 +178,8 @@ public class AccountDatabase {
             double accountFee = accounts[i].monthlyFee();
             double newAccountBalance = accounts[i].getBalance() - accountFee + accountInterest;
             System.out.println(accounts[i].toString() + "\n-interest: $ "
-                    + moneyFormat.format(accountFee)
-                    + "\n-fee: $ " + moneyFormat.format(accountInterest)
+                    + moneyFormat.format(accountInterest)
+                    + "\n-fee: $ " + moneyFormat.format(accountFee)
                     + "\n-new balance: $ " + moneyFormat.format(newAccountBalance));
         }
         System.out.println("--end of printing--");
@@ -198,8 +198,8 @@ public class AccountDatabase {
             double accountFee = accounts[i].monthlyFee();
             double newAccountBalance = accounts[i].getBalance() - accountFee + accountInterest;
             System.out.println(accounts[i].toString() + "\n-interest: $ "
-                    + moneyFormat.format(accountFee)
-                    + "\n-fee: $ " + moneyFormat.format(accountInterest)
+                    + moneyFormat.format(accountInterest)
+                    + "\n-fee: $ " + moneyFormat.format(accountFee)
                     + "\n-new balance: $ " + moneyFormat.format(newAccountBalance));
         }
         System.out.println("--end of printing--");
