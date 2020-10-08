@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
  */
 public class TransactionManager {
 
-    AccountDatabase accountsDB = new AccountDatabase();
+    private final AccountDatabase accountsDB = new AccountDatabase();
 
     /**
      * Handles the IO of transactions, and handles command inputs from the client
