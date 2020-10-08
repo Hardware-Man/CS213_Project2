@@ -10,7 +10,7 @@ public class MoneyMarket extends Account {
     private int withdrawals;
 
     /**
-     * Parametrized constructor to initialize a moneymarket account
+     * Parametrized constructor to initialize a Money Market account
      * @param holder of account
      * @param balance to start account with
      * @param dateOpen date account was opened
@@ -34,7 +34,7 @@ public class MoneyMarket extends Account {
 
     /**
      * Returns a string representation of the information
-     * held in moneymarket account
+     * held in Money Market account
      */
     @Override
     public String toString() {
@@ -44,7 +44,7 @@ public class MoneyMarket extends Account {
 
 
     /**
-     * Returns monthly interest of moneymarket account
+     * Returns monthly interest of Money Market account
      */
     @Override
     public double monthlyInterest() {
@@ -53,7 +53,7 @@ public class MoneyMarket extends Account {
 
 
     /**
-     * Returns monthly fee of moneymarket account
+     * Returns monthly fee of Money Market account
      */
     @Override
     public double monthlyFee() {

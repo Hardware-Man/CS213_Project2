@@ -8,7 +8,14 @@ import java.util.StringTokenizer;
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
 public class AccountDatabase {
+    /**
+     * Array storing the accounts in AccountDatabase
+     */
     private Account[] accounts;
+
+    /**
+     * Variable indicating current number of accounts stored
+     */
     private int size;
 
     /**
@@ -126,6 +133,7 @@ public class AccountDatabase {
      * Sorts the database in ascending order by date accounts were opened.
      */
     private void sortByDateOpen() {
+        //selection sort
         for (int i = 0; i < size - 1; i++) {
             int earliestDateIndex = i;
             for (int j = i + 1; j < size; j++)
@@ -143,16 +151,16 @@ public class AccountDatabase {
      * Sort database in ascending order based on last name of account holder
      */
     private void sortByLastName() {
-        for (int i = 0; i < size - 1; i++)//selection sort
-        {
-            int alphSmallerIndex = i;
+        //selection sort
+        for (int i = 0; i < size - 1; i++) {
+            int alphaSmallerIndex = i;
             for (int j = i + 1; j < size; j++)
                 if (accounts[j].getHolder().getLastNameFirstName()
-                        .compareTo(accounts[alphSmallerIndex].getHolder().getLastNameFirstName()) < 1) {
-                    alphSmallerIndex = j;
+                        .compareTo(accounts[alphaSmallerIndex].getHolder().getLastNameFirstName()) < 1) {
+                    alphaSmallerIndex = j;
                 }
-            Account acc = accounts[alphSmallerIndex];
-            accounts[alphSmallerIndex] = accounts[i];
+            Account acc = accounts[alphaSmallerIndex];
+            accounts[alphaSmallerIndex] = accounts[i];
             accounts[i] = acc;
         }
     }

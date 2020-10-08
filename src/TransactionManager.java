@@ -1,4 +1,5 @@
 import java.text.DecimalFormat;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -21,9 +22,18 @@ public class TransactionManager {
 
         quit:
         while (true) {
-            tokens = new StringTokenizer(commandReader.nextLine());
-            String command = tokens.nextToken();
-
+            String command;
+            try {
+                tokens = new StringTokenizer(commandReader.nextLine());
+                command = tokens.nextToken();
+            } catch (NoSuchElementException e) {
+                System.out.println("Please enter a command");
+                continue;
+            }
+            if (command.length() > 2) {
+                System.out.println("Command '" + command + "' not supported!");
+                continue;
+            }
             switch (command.charAt(0)) {
                 case 'Q':
                     if (tokens.hasMoreTokens()) {
@@ -32,32 +42,47 @@ public class TransactionManager {
                     }
                     break quit;
                 case 'O':
+                    if (command.length() == 1) {
+                        System.out.println("Command 'O' not supported!");
+                        break;
+                    }
                     switch (command.charAt(1)) {
                         case 'C':
-                            openCheckingAccount(tokens);
-                            break;
                         case 'S':
-                            openSavingsAccount(tokens);
-                            break;
                         case 'M':
-                            openMoneyMarketAccount(tokens);
+                            openAccount(command.charAt(1), tokens);
                             break;
                         default:
                             System.out.println("Command '" + command + "' not supported!");
-                            break;
                     }
 
                     break;
                 case 'C':
+                    if (command.length() == 1) {
+                        System.out.println("Command 'C' not supported!");
+                        break;
+                    }
                     closeAccount(command.charAt(1), tokens);
                     break;
                 case 'W':
+                    if (command.length() == 1) {
+                        System.out.println("Command 'W' not supported!");
+                        break;
+                    }
                     withdrawFromAccount(command.charAt(1), tokens);
                     break;
                 case 'D':
+                    if (command.length() == 1) {
+                        System.out.println("Command 'D' not supported!");
+                        break;
+                    }
                     depositToAccount(command.charAt(1), tokens);
                     break;
                 case 'P':
+                    if (command.length() == 1) {
+                        System.out.println("Command 'P' not supported!");
+                        break;
+                    }
                     displayAccounts(command.charAt(1));
                     break;
                 default:
@@ -71,13 +96,21 @@ public class TransactionManager {
     }
 
     /**
-     * Opens a checking account and adds it to the database
-     * @param tokens from user input containing name, amount, date, and direct deposit
+     * Opens an account and adds it to the database
+     *
+     * @param tokens from user input containing user information (varies based on account type)
      */
-    private void openCheckingAccount(StringTokenizer tokens) {
-        if (tokens.countTokens() != 5) {
-            System.out.println("Wrong number of tokens");
-            return;
+    private void openAccount(char accType, StringTokenizer tokens) {
+        if (accType == 'M') {
+            if (tokens.countTokens() != 4) {
+                System.out.println("Wrong number of tokens");
+                return;
+            }
+        } else {
+            if (tokens.countTokens() != 5) {
+                System.out.println("Wrong number of tokens");
+                return;
+            }
         }
 
         String firstName = tokens.nextToken();
@@ -99,108 +132,61 @@ public class TransactionManager {
             int month = Integer.parseInt(dateTokens.nextToken());
             int year = Integer.parseInt(dateTokens.nextToken());
             openingDate = new Date(year, month, day);
+            if(!openingDate.isValid()) {
+                System.out.println(openingDate.toString() + " is not a valid date!");
+                return;
+            }
         } catch (NumberFormatException e) {
             System.out.println("Input data type mismatch.");
             return;
         }
 
-        boolean directDeposit = Boolean.parseBoolean(tokens.nextToken());
+        switch (accType) {
+            case 'C':
+                String boolChecking = tokens.nextToken();
+                if(!(boolChecking.equalsIgnoreCase("true") || boolChecking.equalsIgnoreCase("false"))) {
+                    System.out.println("Input data type mismatch.");
+                    return;
+                }
 
-        if (accountsDB.add(new Checking(profile, balance, openingDate, directDeposit))) {
-            System.out.println("Account opened and added to the database.");
-        } else {
-            System.out.println("Account is already in the database.");
-        }
-    }
+                boolean directDeposit = Boolean.parseBoolean(boolChecking);
 
-    /**
-     * Opens a savings account and puts it into the database.
-     * @param tokens from user input containing name, amount, date, and loyalty
-     */
-    private void openSavingsAccount(StringTokenizer tokens) {
-        if (tokens.countTokens() != 5) {
-            System.out.println("Wrong number of tokens");
-            return;
-        }
+                if (accountsDB.add(new Checking(profile, balance, openingDate, directDeposit))) {
+                    System.out.println("Account opened and added to the database.");
+                } else {
+                    System.out.println("Account is already in the database.");
+                }
+                break;
+            case 'S':
+                String boolSavings = tokens.nextToken();
+                if(!(boolSavings.equalsIgnoreCase("true") || boolSavings.equalsIgnoreCase("false"))) {
+                    System.out.println("Input data type mismatch.");
+                    return;
+                }
 
-        String firstName = tokens.nextToken();
-        String lastName = tokens.nextToken();
-        Profile profile = new Profile(firstName, lastName);
+                boolean isLoyal = Boolean.parseBoolean(boolSavings);
 
-        double balance;
-        try {
-            balance = Double.parseDouble(tokens.nextToken());
-        } catch (NumberFormatException e) {
-            System.out.println("Input data type mismatch.");
-            return;
-        }
-
-        Date openingDate;
-        try {
-            StringTokenizer dateTokens = new StringTokenizer((tokens.nextToken()), "/", false);
-            int day = Integer.parseInt(dateTokens.nextToken());
-            int month = Integer.parseInt(dateTokens.nextToken());
-            int year = Integer.parseInt(dateTokens.nextToken());
-            openingDate = new Date(year, month, day);
-        } catch (NumberFormatException e) {
-            System.out.println("Input data type mismatch.");
-            return;
-        }
-
-        boolean isLoyal = Boolean.parseBoolean(tokens.nextToken());
-
-        if (accountsDB.add(new Savings(profile, balance, openingDate, isLoyal))) {
-            System.out.println("Account opened and added to the database.");
-        } else {
-            System.out.println("Account is already in the database.");
-        }
-    }
-
-    /**
-     * Opens a money market account and puts it into the database
-     * @param tokens from user input containing name, amount, date, and number of withdrawals
-     */
-    private void openMoneyMarketAccount(StringTokenizer tokens) {
-        if (tokens.countTokens() != 4) {
-            System.out.println("Wrong number of tokens");
-            return;
-        }
-
-        String firstName = tokens.nextToken();
-        String lastName = tokens.nextToken();
-        Profile profile = new Profile(firstName, lastName);
-
-        double balance;
-        try {
-            balance = Double.parseDouble(tokens.nextToken());
-        } catch (NumberFormatException e) {
-            System.out.println("Input data type mismatch.");
-            return;
-        }
-
-        Date openingDate;
-        try {
-            StringTokenizer dateTokens = new StringTokenizer((tokens.nextToken()), "/", false);
-            int day = Integer.parseInt(dateTokens.nextToken());
-            int month = Integer.parseInt(dateTokens.nextToken());
-            int year = Integer.parseInt(dateTokens.nextToken());
-            openingDate = new Date(year, month, day);
-        } catch (NumberFormatException e) {
-            System.out.println("Input data type mismatch.");
-            return;
-        }
-
-        if (accountsDB.add(new MoneyMarket(profile, balance, openingDate, 0))) {
-            System.out.println("Account opened and added to the database.");
-        } else {
-            System.out.println("Account is already in the database.");
+                if (accountsDB.add(new Savings(profile, balance, openingDate, isLoyal))) {
+                    System.out.println("Account opened and added to the database.");
+                } else {
+                    System.out.println("Account is already in the database.");
+                }
+                break;
+            default:
+                if (accountsDB.add(new MoneyMarket(profile, balance, openingDate, 0))) {
+                    System.out.println("Account opened and added to the database.");
+                } else {
+                    System.out.println("Account is already in the database.");
+                }
+                break;
         }
     }
 
     /**
      * Closes account and deletes it from the database
+     *
      * @param accType type of account that will be deleted
-     * @param tokens including information like account holder's name
+     * @param tokens  including information like account holder's name
      */
     private void closeAccount(char accType, StringTokenizer tokens) {
         if (tokens.countTokens() != 2) {
@@ -235,8 +221,9 @@ public class TransactionManager {
 
     /**
      * Deposits funds into an account
+     *
      * @param accType type of account
-     * @param tokens information about the account, like owner
+     * @param tokens  information about the account, like owner
      */
     private void depositToAccount(char accType, StringTokenizer tokens) {
         if (tokens.countTokens() != 3) {
@@ -271,8 +258,7 @@ public class TransactionManager {
             case 'M':
                 if (accountsDB.deposit(new MoneyMarket(profile, amount, new Date(1, 1, 1), 0), amount)) {
                     System.out.println(moneyFormat.format(amount) + " deposited successfully.");
-                }
-                else {
+                } else {
                     System.out.println("Account does not exist.");
                 }
                 break;
@@ -283,8 +269,9 @@ public class TransactionManager {
 
     /**
      * Withdraws funds from an account
+     *
      * @param accType type of account
-     * @param tokens information about the account, like owner
+     * @param tokens  information about the account, like owner
      */
     private void withdrawFromAccount(char accType, StringTokenizer tokens) {
         if (tokens.countTokens() != 3) {
@@ -347,6 +334,7 @@ public class TransactionManager {
     /**
      * Prints contents of database in ways depending on
      * specification (none, by open date, or by last name)
+     *
      * @param specification for how to display accounts
      */
     private void displayAccounts(char specification) {
