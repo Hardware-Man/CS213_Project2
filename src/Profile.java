@@ -4,7 +4,14 @@
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
 public class Profile {
+    /**
+     * Profile's first name
+     */
     private final String fName;
+
+    /**
+     * Profile's last name
+     */
     private final String lName;
 
     /**

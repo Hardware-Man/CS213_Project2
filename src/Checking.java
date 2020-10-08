@@ -4,6 +4,9 @@
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
 public class Checking extends Account {
+    /**
+     * Indicates whether or not Checking account uses Direct Deposit
+     */
     private final boolean directDeposit;
 
     /**

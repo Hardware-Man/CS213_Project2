@@ -4,6 +4,9 @@
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
 public class Savings extends Account {
+    /**
+     * Indicates whether or not Savings account user is loyal or not
+     */
     private final boolean isLoyal;
 
     /**

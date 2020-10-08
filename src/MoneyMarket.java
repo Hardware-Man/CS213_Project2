@@ -4,6 +4,9 @@
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
 public class MoneyMarket extends Account {
+    /**
+     * Number of withdrawals from Money Market account
+     */
     private int withdrawals;
 
     /**

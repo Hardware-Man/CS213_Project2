@@ -6,8 +6,19 @@ import java.text.DecimalFormat;
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
 public abstract class Account {
+    /**
+     * Account holder's (Profile) variable
+     */
     private final Profile holder;
+
+    /**
+     * Account's balance (double) variable
+     */
     private double balance;
+
+    /**
+     * Account's open date (Date) variable
+     */
     private final Date dateOpen;
 
     /**
