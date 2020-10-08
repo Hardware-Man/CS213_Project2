@@ -61,7 +61,15 @@ public class TransactionManager {
                         System.out.println("Command 'C' not supported!");
                         break;
                     }
-                    closeAccount(command.charAt(1), tokens);
+                    switch (command.charAt(1)) {
+                        case 'C':
+                        case 'S':
+                        case 'M':
+                            closeAccount(command.charAt(1), tokens);
+                            break;
+                        default:
+                            System.out.println("Command '" + command + "' not supported!");
+                    }
                     break;
                 case 'W':
                     if (command.length() == 1) {
@@ -127,8 +135,8 @@ public class TransactionManager {
         Date openingDate;
         try {
             StringTokenizer dateTokens = new StringTokenizer((tokens.nextToken()), "/", false);
-            int day = Integer.parseInt(dateTokens.nextToken());
             int month = Integer.parseInt(dateTokens.nextToken());
+            int day = Integer.parseInt(dateTokens.nextToken());
             int year = Integer.parseInt(dateTokens.nextToken());
             openingDate = new Date(year, month, day);
             if (!openingDate.isValid()) {
@@ -201,20 +209,20 @@ public class TransactionManager {
                 } else {
                     System.out.println("Account does not exist");
                 }
+                break;
             case 'S':
                 if (accountsDB.remove(new Savings(profile, 0, new Date(1, 1, 1), true))) {
                     System.out.println("Account closed and removed from the database.");
                 } else {
                     System.out.println("Account does not exist");
                 }
-            case 'M':
+                break;
+            default:
                 if (accountsDB.remove(new MoneyMarket(profile, 0, new Date(1, 1, 1), 0))) {
                     System.out.println("Account closed and removed from the database.");
                 } else {
                     System.out.println("Account does not exist");
                 }
-            default:
-                System.out.println("Command 'C" + accType + "' not supported!");
         }
     }
 

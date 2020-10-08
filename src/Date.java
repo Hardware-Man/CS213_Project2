@@ -52,10 +52,10 @@ public class Date implements Comparable<Date> {
     /**
      * Returns date in string format
      *
-     * @return string representation of date with day, month, and year
+     * @return string representation of date with month, day, and year
      */
     public String toString() {
-        return day + "/" + month + "/" + year;
+        return month + "/" + day + "/" + year;
     }
 
     /**
