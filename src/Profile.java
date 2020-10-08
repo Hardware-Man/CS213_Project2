@@ -8,7 +8,8 @@ public class Profile {
     private final String lName;
 
     /**
-     * Initializes a constructor for a profile of an account holder given the first and last name
+     * Initializes a constructor for a profile of
+     * an account holder given the first and last name
      *
      * @param fName First name of account holder
      * @param lName Last name of account holder

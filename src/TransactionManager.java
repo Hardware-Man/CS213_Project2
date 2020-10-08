@@ -12,7 +12,9 @@ public class TransactionManager {
     Scanner commandReader = new Scanner(System.in);
     AccountDatabase accountsDB = new AccountDatabase();
 
-
+    /**
+     * Handles the IO of transactions, and handles command inputs from the client
+     */
     public void run() {
         System.out.println("Transaction processing starts.....");
         StringTokenizer tokens;
@@ -47,7 +49,7 @@ public class TransactionManager {
 
                     break;
                 case 'C':
-                    closeAccount(accountsDB, command.charAt(1), tokens);
+                    closeAccount(command.charAt(1), tokens);
                     break;
                 case 'W':
                     withdrawFromAccount(command.charAt(1), tokens);
@@ -68,6 +70,10 @@ public class TransactionManager {
         System.out.println("Transaction processing completed.");
     }
 
+    /**
+     * Opens a checking account and adds it to the database
+     * @param tokens from user input containing name, amount, date, and direct deposit
+     */
     private void openCheckingAccount(StringTokenizer tokens) {
         if (tokens.countTokens() != 5) {
             System.out.println("Wrong number of tokens");
@@ -107,6 +113,10 @@ public class TransactionManager {
         }
     }
 
+    /**
+     * Opens a savings account and puts it into the database.
+     * @param tokens from user input containing name, amount, date, and loyalty
+     */
     private void openSavingsAccount(StringTokenizer tokens) {
         if (tokens.countTokens() != 5) {
             System.out.println("Wrong number of tokens");
@@ -146,6 +156,10 @@ public class TransactionManager {
         }
     }
 
+    /**
+     * Opens a money market account and puts it into the database
+     * @param tokens from user input containing name, amount, date, and number of withdrawals
+     */
     private void openMoneyMarketAccount(StringTokenizer tokens) {
         if (tokens.countTokens() != 4) {
             System.out.println("Wrong number of tokens");
@@ -183,7 +197,12 @@ public class TransactionManager {
         }
     }
 
-    private void closeAccount(AccountDatabase accounts, char accType, StringTokenizer tokens) {
+    /**
+     * Closes account and deletes it from the database
+     * @param accType type of account that will be deleted
+     * @param tokens including information like account holder's name
+     */
+    private void closeAccount(char accType, StringTokenizer tokens) {
         if (tokens.countTokens() != 2) {
             System.out.println("Wrong number of tokens");
             return;
@@ -192,19 +211,19 @@ public class TransactionManager {
         Profile profile = new Profile(tokens.nextToken(), tokens.nextToken());
         switch (accType) {
             case 'C':
-                if (accounts.remove(new Checking(profile, 0, new Date(1, 1, 1), true))) {
+                if (accountsDB.remove(new Checking(profile, 0, new Date(1, 1, 1), true))) {
                     System.out.println("Account closed and removed from the database.");
                 } else {
                     System.out.println("Account does not exist");
                 }
             case 'S':
-                if (accounts.remove(new Savings(profile, 0, new Date(1, 1, 1), true))) {
+                if (accountsDB.remove(new Savings(profile, 0, new Date(1, 1, 1), true))) {
                     System.out.println("Account closed and removed from the database.");
                 } else {
                     System.out.println("Account does not exist");
                 }
             case 'M':
-                if (accounts.remove(new MoneyMarket(profile, 0, new Date(1, 1, 1), 0))) {
+                if (accountsDB.remove(new MoneyMarket(profile, 0, new Date(1, 1, 1), 0))) {
                     System.out.println("Account closed and removed from the database.");
                 } else {
                     System.out.println("Account does not exist");
@@ -214,7 +233,11 @@ public class TransactionManager {
         }
     }
 
-
+    /**
+     * Deposits funds into an account
+     * @param accType type of account
+     * @param tokens information about the account, like owner
+     */
     private void depositToAccount(char accType, StringTokenizer tokens) {
         if (tokens.countTokens() != 3) {
             System.out.println("Wrong number of tokens");
@@ -258,6 +281,11 @@ public class TransactionManager {
         }
     }
 
+    /**
+     * Withdraws funds from an account
+     * @param accType type of account
+     * @param tokens information about the account, like owner
+     */
     private void withdrawFromAccount(char accType, StringTokenizer tokens) {
         if (tokens.countTokens() != 3) {
             System.out.println("Wrong number of tokens");
@@ -316,6 +344,11 @@ public class TransactionManager {
         }
     }
 
+    /**
+     * Prints contents of database in ways depending on
+     * specification (none, by open date, or by last name)
+     * @param specification for how to display accounts
+     */
     private void displayAccounts(char specification) {
         switch (specification) {
             case 'A':

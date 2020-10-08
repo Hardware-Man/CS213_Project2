@@ -11,11 +11,20 @@ public class AccountDatabase {
     private Account[] accounts;
     private int size;
 
+    /**
+     * Constructor to initialize an AccountDatabase
+     */
     public AccountDatabase() {
         accounts = new Account[5];
         size = 0;
     }
 
+    /**
+     * Finds an account in the database and returns its index.
+     *
+     * @param account to search for
+     * @return index of account if found, -1 otherwise
+     */
     private int find(Account account) {
         StringTokenizer targetTokens = new StringTokenizer(account.toString(), "*");
         String targetAccType = targetTokens.nextToken();
@@ -31,12 +40,21 @@ public class AccountDatabase {
         return -1;
     }
 
+    /**
+     * Increases capacity of database when database exceeds current capacity.
+     */
     private void grow() {
         Account[] replaceAccounts = new Account[this.accounts.length + 5];
         System.arraycopy(this.accounts, 0, replaceAccounts, 0, this.accounts.length);
         this.accounts = replaceAccounts;
     }
 
+    /**
+     * Adds an account to the database if it doesn't already exist in it.
+     *
+     * @param account to be added
+     * @return false if account already exists in the database, true if add is successful.
+     */
     public boolean add(Account account) {
         if (find(account) != -1) {
             return false;
@@ -49,6 +67,13 @@ public class AccountDatabase {
         return true;
     }
 
+    /**
+     * Removes an account from the database if it's in it
+     *
+     * @param account to search for and remove
+     * @return true if account is found and removed,
+     * false if account doesn't exist in database
+     */
     public boolean remove(Account account) {
         int accountPosition = find(account);
         if (accountPosition == -1) {
@@ -60,6 +85,13 @@ public class AccountDatabase {
         return true;
     }
 
+    /**
+     * Deposits money into account if it exists in database
+     *
+     * @param account to receive money
+     * @param amount  of money to deposit
+     * @return true if account exists, false otherwise
+     */
     public boolean deposit(Account account, double amount) {
         int accountPosition = find(account);
         if (accountPosition == -1) {
@@ -69,6 +101,14 @@ public class AccountDatabase {
         return true;
     }
 
+    /**
+     * Withdraws money from an account in database if it exists
+     *
+     * @param account to withdraw from
+     * @param amount  to take from account
+     * @return -1 if account doesn't exist,
+     * 1 if insufficient funds, and 0 if successful withdrawal
+     */
     public int withdrawal(Account account, double amount) {
         int accountPosition = find(account);
         if (accountPosition == -1) {
@@ -82,10 +122,11 @@ public class AccountDatabase {
         return 0;
     }
 
-
+    /**
+     * Sorts the database in ascending order by date accounts were opened.
+     */
     private void sortByDateOpen() {
-        for (int i = 0; i < size - 1; i++)//selection sort
-        {
+        for (int i = 0; i < size - 1; i++) {
             int earliestDateIndex = i;
             for (int j = i + 1; j < size; j++)
                 if (accounts[j].getDateOpen()
@@ -98,7 +139,9 @@ public class AccountDatabase {
         }
     }
 
-
+    /**
+     * Sort database in ascending order based on last name of account holder
+     */
     private void sortByLastName() {
         for (int i = 0; i < size - 1; i++)//selection sort
         {
@@ -114,6 +157,10 @@ public class AccountDatabase {
         }
     }
 
+    /**
+     * Prints the database sorted by date accounts were opened in addition
+     * to information regarding interest, fee, and balance
+     */
     public void printByDateOpen() {
         System.out.println("\n--Printing statements by date opened--\n");
         sortByDateOpen();
@@ -127,6 +174,10 @@ public class AccountDatabase {
         System.out.println("--end of printing--");
     }
 
+    /**
+     * Prints the database sorted by last name and information regarding
+     * interest, fee, and balance
+     */
     public void printByLastName() {
         System.out.println("\n--Printing statements by last name--\n");
         sortByLastName();
@@ -140,6 +191,9 @@ public class AccountDatabase {
         System.out.println("--end of printing--");
     }
 
+    /**
+     * Prints accounts in the database
+     */
     public void printAccounts() {
         System.out.println("--Listing accounts in the database--");
         for (int i = 0; i < size; i++) {
