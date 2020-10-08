@@ -10,6 +10,9 @@ import java.util.StringTokenizer;
  */
 public class TransactionManager {
 
+    /**
+     * AccountDatabase object for this class to utilize throughout its methods
+     */
     private final AccountDatabase accountsDB = new AccountDatabase();
 
     /**
