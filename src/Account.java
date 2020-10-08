@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 /**
  * This is an abstract class that defines the common features of all account types.
  *
@@ -23,7 +25,8 @@ public abstract class Account {
     }
 
     public String toString() {
-        return holder.toString() + "* " + balance + "*" + dateOpen.toString() + "*";
+        DecimalFormat balFormat = new DecimalFormat("0.00");
+        return holder.toString() + "* $" + balFormat.format(balance) + "*" + dateOpen.toString();
     }
 
     public abstract double monthlyInterest();

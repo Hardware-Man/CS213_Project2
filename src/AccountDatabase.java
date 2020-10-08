@@ -1,3 +1,5 @@
+import java.util.StringTokenizer;
+
 /**
  * This is an array-based container class with an initial capacity of 5. It will automatically grow the capacity by 5
  * if the database is full. The array shall hold different account instances in Checking, Savings or MoneyMarket.
@@ -14,9 +16,15 @@ public class AccountDatabase {
     }
 
     private int find(Account account) {
+        StringTokenizer targetTokens = new StringTokenizer(account.toString(),"*");
+        String targetAccType = targetTokens.nextToken();
+        String targetProfileHolder = targetTokens.nextToken();
         for(int i = 0; i < size; i++) {
-            if(accounts[i].toString().equals(account.toString())) {
-                return i;
+            StringTokenizer tokens = new StringTokenizer(accounts[i].toString(),"*");
+            if(targetAccType.equals(tokens.nextToken())){
+                if(targetProfileHolder.equals(tokens.nextToken())){
+                    return i;
+                }
             }
         }
         return -1;
@@ -106,25 +114,35 @@ public class AccountDatabase {
     }
 
     private void printByDateOpen() {
+        System.out.println("\n--Printing statements by date opened--\n");
         sortByDateOpen();
-        for(Account account : accounts) {
-            System.out.println(account.toString());
+        for(int i = 0; i < size ; i++) {
+            System.out.println(accounts[i].toString() + "\n-interest: "
+             + accounts[i].monthlyInterest() + "\n-fee: " + accounts[i].monthlyFee()
+                    + "\n-new balance: " + accounts[i].getBalance());
+
         }
+        System.out.println("--end of printing--");
     }
 
     public void printByLastName() {
+        System.out.println("\n--Printing statements by last name--\n");
         sortByLastName();
-        for(Account account : accounts) {
-            System.out.println(account.toString());
+        for(int i = 0; i < size ; i++) {
+            System.out.println(accounts[i].toString() + "\n-interest: "
+                    + accounts[i].monthlyInterest() + "\n-fee: " + accounts[i].monthlyFee()
+                    + "\n-new balance: " + accounts[i].getBalance());
         }
+        System.out.println("--end of printing--");
     }
 
     public void printAccounts() {
-        for(int i = 0; i < size;i++){
-            System.out.println(accounts[i]);
+        System.out.println("--Listing accounts in the database--");
+        for(int i = 0; i < size ; i++) {
+            System.out.println(accounts[i].toString());
         }
-        /*for(Account account : accounts) {
-            System.out.println(account.toString());
-        }*/
+        System.out.println("--end of listing--");
     }
+
+
 }
