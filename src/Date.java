@@ -10,9 +10,10 @@ public class Date implements Comparable<Date> {
 
     /**
      * Parametrized constructor to initialize a date
-     * @param year in date
+     *
+     * @param year  in date
      * @param month in date
-     * @param day in date
+     * @param day   in date
      */
     public Date(int year, int month, int day) {
         this.year = year;
@@ -22,6 +23,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Compares this date object to another
+     *
      * @param date to be compared to
      * @return -1 if this date is earlier than the other, 1 if it is later, and 0 if they are equal.
      */
@@ -49,6 +51,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Returns date in string format
+     *
      * @return string representation of date with day, month, and year
      */
     public String toString() {
@@ -57,6 +60,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Tells whether or not a date is formatted correctly
+     *
      * @return true if the date is valid
      */
     public boolean isValid() {

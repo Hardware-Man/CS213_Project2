@@ -55,7 +55,6 @@ public class TransactionManager {
                         default:
                             System.out.println("Command '" + command + "' not supported!");
                     }
-
                     break;
                 case 'C':
                     if (command.length() == 1) {
@@ -132,7 +131,7 @@ public class TransactionManager {
             int month = Integer.parseInt(dateTokens.nextToken());
             int year = Integer.parseInt(dateTokens.nextToken());
             openingDate = new Date(year, month, day);
-            if(!openingDate.isValid()) {
+            if (!openingDate.isValid()) {
                 System.out.println(openingDate.toString() + " is not a valid date!");
                 return;
             }
@@ -144,7 +143,7 @@ public class TransactionManager {
         switch (accType) {
             case 'C':
                 String boolChecking = tokens.nextToken();
-                if(!(boolChecking.equalsIgnoreCase("true") || boolChecking.equalsIgnoreCase("false"))) {
+                if (!(boolChecking.equalsIgnoreCase("true") || boolChecking.equalsIgnoreCase("false"))) {
                     System.out.println("Input data type mismatch.");
                     return;
                 }
@@ -159,7 +158,7 @@ public class TransactionManager {
                 break;
             case 'S':
                 String boolSavings = tokens.nextToken();
-                if(!(boolSavings.equalsIgnoreCase("true") || boolSavings.equalsIgnoreCase("false"))) {
+                if (!(boolSavings.equalsIgnoreCase("true") || boolSavings.equalsIgnoreCase("false"))) {
                     System.out.println("Input data type mismatch.");
                     return;
                 }

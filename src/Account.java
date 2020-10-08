@@ -23,8 +23,9 @@ public abstract class Account {
 
     /**
      * Parametrized constructor to initialize an Account object
-     * @param holder of account
-     * @param balance to start account with
+     *
+     * @param holder   of account
+     * @param balance  to start account with
      * @param dateOpen date for the opening of account
      */
     public Account(Profile holder, double balance, Date dateOpen) {
@@ -35,6 +36,7 @@ public abstract class Account {
 
     /**
      * Updates balance when account is charged
+     *
      * @param amount of money charged
      */
     public void debit(double amount) {
@@ -43,6 +45,7 @@ public abstract class Account {
 
     /**
      * Updates balance when funds are added
+     *
      * @param amount of money to add to account
      */
     public void credit(double amount) {
@@ -52,6 +55,7 @@ public abstract class Account {
     /**
      * Sends a string with information regarding
      * opening date, balance, and the account holder
+     *
      * @return formatted string
      */
     public String toString() {
@@ -61,18 +65,21 @@ public abstract class Account {
 
     /**
      * Abstract method for account's monthly interest
+     *
      * @return monthly interest in dollars
      */
     public abstract double monthlyInterest();
 
     /**
      * Abstract method for account's monthly fee
+     *
      * @return monthly fee in dollars
      */
     public abstract double monthlyFee();
 
     /**
      * Getter method for account balance
+     *
      * @return account balance as a double
      */
     public double getBalance() {
@@ -81,6 +88,7 @@ public abstract class Account {
 
     /**
      * Getter method for account opening date
+     *
      * @return Date object representing when account was opened
      */
     public Date getDateOpen() {
@@ -89,6 +97,7 @@ public abstract class Account {
 
     /**
      * Getter method for account holder
+     *
      * @return Profile object representing account holder
      */
     public Profile getHolder() {

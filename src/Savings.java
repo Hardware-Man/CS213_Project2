@@ -11,10 +11,11 @@ public class Savings extends Account {
 
     /**
      * Parametrized constructor to initialize a savings account
-     * @param holder of savings account
-     * @param balance account starts with
+     *
+     * @param holder   of savings account
+     * @param balance  account starts with
      * @param dateOpen date of opening of account
-     * @param isLoyal if the account holder is loyal
+     * @param isLoyal  if the account holder is loyal
      */
     public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal) {
         super(holder, balance, dateOpen);

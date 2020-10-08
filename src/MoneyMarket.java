@@ -11,9 +11,10 @@ public class MoneyMarket extends Account {
 
     /**
      * Parametrized constructor to initialize a Money Market account
-     * @param holder of account
-     * @param balance to start account with
-     * @param dateOpen date account was opened
+     *
+     * @param holder      of account
+     * @param balance     to start account with
+     * @param dateOpen    date account was opened
      * @param withdrawals number of times this account has been withdrawn from
      */
     public MoneyMarket(Profile holder, double balance, Date dateOpen, int withdrawals) {

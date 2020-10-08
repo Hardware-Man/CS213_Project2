@@ -11,9 +11,10 @@ public class Checking extends Account {
 
     /**
      * Parametrized constructor to initialize a checking account
-     * @param holder of account
-     * @param balance to start account with
-     * @param dateOpen date the account was opened
+     *
+     * @param holder        of account
+     * @param balance       to start account with
+     * @param dateOpen      date the account was opened
      * @param directDeposit whether or not account has direct deposit
      */
     public Checking(Profile holder, double balance, Date dateOpen, boolean directDeposit) {
