@@ -3,7 +3,7 @@
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
-public class MoneyMarket extends Account{
+public class MoneyMarket extends Account {
     private int withdrawals;
 
     public MoneyMarket(Profile holder, double balance, Date dateOpen, int withdrawals) {
@@ -22,7 +22,7 @@ public class MoneyMarket extends Account{
 
     @Override
     public double monthlyInterest() {
-        return this.getBalance() * 0.0065/12;
+        return this.getBalance() * 0.0065 / 12;
     }
 
     @Override

@@ -3,7 +3,7 @@
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
-public class Date implements Comparable<Date>{
+public class Date implements Comparable<Date> {
     private final int year;
     private final int month;
     private final int day;
@@ -15,22 +15,22 @@ public class Date implements Comparable<Date>{
     }
 
     public int compareTo(Date date) {
-        if(year > date.year) {
+        if (year > date.year) {
             return 1;
         }
-        if(year < date.year) {
+        if (year < date.year) {
             return -1;
         }
-        if(month > date.month) {
+        if (month > date.month) {
             return 1;
         }
-        if(month < date.month) {
+        if (month < date.month) {
             return -1;
         }
-        if(day > date.month) {
+        if (day > date.month) {
             return 1;
         }
-        if(day < date.day) {
+        if (day < date.day) {
             return -1;
         }
         return 0;
@@ -41,21 +41,17 @@ public class Date implements Comparable<Date>{
     }
 
     public boolean isValid() {
-        if(month < 1 || month > 12 || day < 1 || year < 1) {
+        if (month < 1 || month > 12 || day < 1 || year < 1) {
             return false;
-        }
-        else if(month == 2) {
-            if (year%4 == 0 && (year%100 != 0 || year%400 == 0)) {
+        } else if (month == 2) {
+            if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
                 return day <= 29;
-            }
-            else {
+            } else {
                 return day <= 28;
             }
-        }
-        else if((month == 1 ||month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)) {
+        } else if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)) {
             return day <= 31;
-        }
-        else {
+        } else {
             return day <= 30;
         }
     }

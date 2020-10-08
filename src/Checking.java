@@ -3,7 +3,7 @@
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
-public class Checking extends Account{
+public class Checking extends Account {
     private final boolean directDeposit;
 
     public Checking(Profile holder, double balance, Date dateOpen, boolean directDeposit) {
@@ -19,7 +19,7 @@ public class Checking extends Account{
 
     @Override
     public double monthlyInterest() {
-        return this.getBalance() * 0.0005/12;
+        return this.getBalance() * 0.0005 / 12;
     }
 
     @Override

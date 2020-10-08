@@ -3,7 +3,7 @@
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
-public class Savings extends Account{
+public class Savings extends Account {
     private final boolean isLoyal;
 
     public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal) {
@@ -19,7 +19,7 @@ public class Savings extends Account{
 
     @Override
     public double monthlyInterest() {
-        return this.isLoyal ? this.getBalance() * 0.0035/12 : this.getBalance() * 0.0025/12;
+        return this.isLoyal ? this.getBalance() * 0.0035 / 12 : this.getBalance() * 0.0025 / 12;
     }
 
     @Override

@@ -34,34 +34,34 @@ public class TransactionManager {
                 case 'O':
                     switch (command.charAt(1)) {
                         case 'C':
-                            openCheckingAccount(accountsDB, tokens);
+                            openCheckingAccount(tokens);
                             break;
                         case 'S':
-                            openSavingsAccount(accountsDB, tokens);
+                            openSavingsAccount(tokens);
                             break;
                         case 'M':
-                            openMoneyMarketAccount(accountsDB, tokens);
+                            openMoneyMarketAccount(tokens);
                             break;
                         default:
-                            System.out.println("Command \'" + command + "\' not supported!");
+                            System.out.println("Command '" + command + "' not supported!");
                             break;
                     }
 
                     break;
                 case 'C':
-                    closeAccount(accountsDB,command.charAt(1),tokens);
+                    closeAccount(accountsDB, command.charAt(1), tokens);
                     break;
                 case 'W':
-
+                    withdrawFromAccount(tokens);
                     break;
                 case 'D':
-
+                    depositToAccount(tokens);
                     break;
                 case 'P':
-                    displayAccounts(accountsDB,command.charAt(1));
+                    displayAccounts(command.charAt(1));
                     break;
                 default:
-                    System.out.println("Command \'" + command + "\' not supported!");
+                    System.out.println("Command '" + command + "' not supported!");
                     break;
             }
 
@@ -70,7 +70,7 @@ public class TransactionManager {
         System.out.println("Transaction processing completed.");
     }
 
-    private void openCheckingAccount(AccountDatabase accounts, StringTokenizer tokens) {
+    private void openCheckingAccount(StringTokenizer tokens) {
         if (tokens.countTokens() != 5) {
             System.out.println("Wrong number of tokens");
             return;
@@ -82,7 +82,7 @@ public class TransactionManager {
 
         double balance;
         try {
-            balance = Double.valueOf(tokens.nextToken());
+            balance = Double.parseDouble(tokens.nextToken());
         } catch (NumberFormatException e) {
             System.out.println("Input data type mismatch.");
             return;
@@ -109,7 +109,7 @@ public class TransactionManager {
         }
     }
 
-    private void openSavingsAccount(AccountDatabase accounts, StringTokenizer tokens) {
+    private void openSavingsAccount(StringTokenizer tokens) {
         if (tokens.countTokens() != 5) {
             System.out.println("Wrong number of tokens");
             return;
@@ -121,7 +121,7 @@ public class TransactionManager {
 
         double balance;
         try {
-            balance = Double.valueOf(tokens.nextToken());
+            balance = Double.parseDouble(tokens.nextToken());
         } catch (NumberFormatException e) {
             System.out.println("Input data type mismatch.");
             return;
@@ -148,7 +148,7 @@ public class TransactionManager {
         }
     }
 
-    private void openMoneyMarketAccount(AccountDatabase accounts, StringTokenizer tokens) {
+    private void openMoneyMarketAccount(StringTokenizer tokens) {
         if (tokens.countTokens() != 4) {
             System.out.println("Wrong number of tokens");
             return;
@@ -160,7 +160,7 @@ public class TransactionManager {
 
         double balance;
         try {
-            balance = Double.valueOf(tokens.nextToken());
+            balance = Double.parseDouble(tokens.nextToken());
         } catch (NumberFormatException e) {
             System.out.println("Input data type mismatch.");
             return;
@@ -211,7 +211,7 @@ public class TransactionManager {
                     System.out.println("Account does not exist");
                 }
             default:
-                System.out.println("Command \' C" + accType + "\' not supported!");
+                System.out.println("Command ' C" + accType + "' not supported!");
 
         }
 
@@ -219,21 +219,25 @@ public class TransactionManager {
     }
 
 
-    private void depositToAccount(AccountDatabase accounts) {
+    private void depositToAccount(StringTokenizer tokens) {
 
     }
 
-    private void withdrawFromAccount(AccountDatabase accounts) {
+    private void withdrawFromAccount(StringTokenizer tokens) {
 
     }
 
-    private void displayAccounts(AccountDatabase accounts, char specification) {
+    private void displayAccounts(char specification) {
         switch (specification) {
             case 'A':
-                accounts.printAccounts();
+                accountsDB.printAccounts();
                 break;
             case 'D':
+                accountsDB.printByDateOpen();
+                break;
             case 'N':
+                accountsDB.printByLastName();
+                break;
             default:
 
         }
