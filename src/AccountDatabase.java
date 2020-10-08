@@ -180,7 +180,7 @@ public class AccountDatabase {
             System.out.println(accounts[i].toString() + "\n-interest: $ "
                     + moneyFormat.format(accountInterest)
                     + "\n-fee: $ " + moneyFormat.format(accountFee)
-                    + "\n-new balance: $ " + moneyFormat.format(newAccountBalance));
+                    + "\n-new balance: $ " + moneyFormat.format(newAccountBalance) + "\n");
         }
         System.out.println("--end of printing--");
     }
@@ -200,7 +200,7 @@ public class AccountDatabase {
             System.out.println(accounts[i].toString() + "\n-interest: $ "
                     + moneyFormat.format(accountInterest)
                     + "\n-fee: $ " + moneyFormat.format(accountFee)
-                    + "\n-new balance: $ " + moneyFormat.format(newAccountBalance));
+                    + "\n-new balance: $ " + moneyFormat.format(newAccountBalance) + "\n");
         }
         System.out.println("--end of printing--");
     }
