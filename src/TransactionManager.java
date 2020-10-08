@@ -10,7 +10,6 @@ import java.util.StringTokenizer;
  */
 public class TransactionManager {
 
-    Scanner commandReader = new Scanner(System.in);
     AccountDatabase accountsDB = new AccountDatabase();
 
     /**
@@ -18,6 +17,7 @@ public class TransactionManager {
      */
     public void run() {
         System.out.println("Transaction processing starts.....");
+        Scanner commandReader = new Scanner(System.in);
         StringTokenizer tokens;
 
         quit:
