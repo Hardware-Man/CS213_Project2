@@ -174,10 +174,13 @@ public class AccountDatabase {
         sortByDateOpen();
         DecimalFormat moneyFormat = new DecimalFormat("0.00");
         for (int i = 0; i < size; i++) {
+            double accountInterest = accounts[i].monthlyInterest();
+            double accountFee = accounts[i].monthlyFee();
+            double newAccountBalance = accounts[i].getBalance() - accountFee + accountInterest;
             System.out.println(accounts[i].toString() + "\n-interest: $ "
-                    + moneyFormat.format(accounts[i].monthlyInterest())
-                    + "\n-fee: $ " + moneyFormat.format(accounts[i].monthlyFee())
-                    + "\n-new balance: $ " + moneyFormat.format(accounts[i].getBalance()));
+                    + moneyFormat.format(accountFee)
+                    + "\n-fee: $ " + moneyFormat.format(accountInterest)
+                    + "\n-new balance: $ " + moneyFormat.format(newAccountBalance));
         }
         System.out.println("--end of printing--");
     }
@@ -191,10 +194,13 @@ public class AccountDatabase {
         sortByLastName();
         DecimalFormat moneyFormat = new DecimalFormat("0.00");
         for (int i = 0; i < size; i++) {
+            double accountInterest = accounts[i].monthlyInterest();
+            double accountFee = accounts[i].monthlyFee();
+            double newAccountBalance = accounts[i].getBalance() - accountFee + accountInterest;
             System.out.println(accounts[i].toString() + "\n-interest: $ "
-                    + moneyFormat.format(accounts[i].monthlyInterest())
-                    + "\n-fee: $ " + moneyFormat.format(accounts[i].monthlyFee())
-                    + "\n-new balance: $ " + moneyFormat.format(accounts[i].getBalance()));
+                    + moneyFormat.format(accountFee)
+                    + "\n-fee: $ " + moneyFormat.format(accountInterest)
+                    + "\n-new balance: $ " + moneyFormat.format(newAccountBalance));
         }
         System.out.println("--end of printing--");
     }
