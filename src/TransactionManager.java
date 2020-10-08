@@ -1,8 +1,6 @@
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.text.DecimalFormat;
 
 /**
  * This is the user interface class that handles the transactions and displays the results on the console.
