@@ -251,20 +251,20 @@ public class TransactionManager {
         switch (accType) {
             case 'C':
                 if (accountsDB.deposit(new Checking(profile, amount, new Date(1, 1, 1), false), amount)) {
-                    System.out.println(moneyFormat.format(amount) + " deposited successfully.");
+                    System.out.println(moneyFormat.format(amount) + " deposited to account.");
                     System.out.println("Account does not exist.");
                 }
                 break;
             case 'S':
                 if (accountsDB.deposit(new Savings(profile, amount, new Date(1, 1, 1), false), amount)) {
-                    System.out.println(moneyFormat.format(amount) + " deposited successfully.");
+                    System.out.println(moneyFormat.format(amount) + " deposited to account.");
                 } else {
                     System.out.println("Account does not exist.");
                 }
                 break;
             case 'M':
                 if (accountsDB.deposit(new MoneyMarket(profile, amount, new Date(1, 1, 1), 0), amount)) {
-                    System.out.println(moneyFormat.format(amount) + " deposited successfully.");
+                    System.out.println(moneyFormat.format(amount) + " deposited to account.");
                 } else {
                     System.out.println("Account does not exist.");
                 }
@@ -306,7 +306,7 @@ public class TransactionManager {
                         System.out.println("Insufficient funds.");
                         break;
                     default:
-                        System.out.println(moneyFormat.format(amount) + " withdrawn successfully.");
+                        System.out.println(moneyFormat.format(amount) + " withdrawn from account.");
                 }
                 break;
             case 'S':
@@ -318,7 +318,7 @@ public class TransactionManager {
                         System.out.println("Insufficient funds.");
                         break;
                     default:
-                        System.out.println(moneyFormat.format(amount) + " withdrawn successfully.");
+                        System.out.println(moneyFormat.format(amount) + " withdrawn from account.");
                 }
                 break;
             case 'M':
@@ -330,7 +330,7 @@ public class TransactionManager {
                         System.out.println("Insufficient funds.");
                         break;
                     default:
-                        System.out.println(moneyFormat.format(amount) + " withdrawn successfully.");
+                        System.out.println(moneyFormat.format(amount) + " withdrawn from account.");
                 }
                 break;
             default:
