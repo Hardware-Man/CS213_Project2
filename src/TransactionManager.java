@@ -359,6 +359,7 @@ public class TransactionManager {
                 accountsDB.printByLastName();
                 break;
             default:
+                System.out.println("Command 'P" + specification + "' not supported!");
 
         }
     }
